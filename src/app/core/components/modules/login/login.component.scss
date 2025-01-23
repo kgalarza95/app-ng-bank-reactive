@@ -1,0 +1,224 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f1f5f9;
+
+    &__container {
+        display: flex;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        width: 800px;
+        max-width: 95%;
+        height: auto;
+        max-height: 95vh;
+        margin: auto;
+    }
+
+
+    &__left {
+        width: 50%;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 40px;
+    }
+
+    &__logo {
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+
+        &-image {
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+    &__title {
+        margin-bottom: 0.5rem;
+        color: #333;
+        text-align: left;
+    }
+
+    &__text {
+        margin-bottom: 1.5rem;
+        color: #555;
+    }
+
+    &__link {
+        color: #1976d2;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__input-group {
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__label {
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #555;
+    }
+
+    &__input {
+        box-sizing: border-box;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: border-color 0.2s ease;
+        width: 100%;
+
+        &:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+
+    }
+
+    &__input--password {
+        padding-right: 3rem;
+        /* Modified to accommodate icon */
+    }
+
+    &__password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__password-toggle {
+        position: absolute;
+        right: 0.5rem;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding-right: 15px;
+
+        >svg {
+            width: 1.2em;
+            height: 1.2em;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+    }
+
+    &__options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    &__checkbox-group {
+        display: flex;
+        align-items: center;
+
+        >input {
+            margin-right: .25rem;
+        }
+    }
+
+    &__checkbox-label {
+        color: #555;
+        font-size: 0.875rem;
+    }
+
+    &__forgot-password {
+        color: #1976d2;
+        font-size: 0.875rem;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__error-message {
+        color: red;
+        margin-bottom: 1rem;
+        text-align: left;
+    }
+
+    &__button {
+        padding: 1rem;
+        background-color: #4f46e5;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: #4e46e5f4;
+        }
+    }
+
+    &__right {
+        width: 70%;
+        background-image: url('/assets/img/fondo_login.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        &>* {
+            position: relative;
+        }
+    }
+
+    &__welcome {
+        padding: 2rem;
+        text-align: center;
+
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    &__welcome-title {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #fff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    &__welcome-text {
+        color: #fff;
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+        background: transparent;
+    }
+}

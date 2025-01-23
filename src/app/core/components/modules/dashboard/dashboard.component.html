@@ -1,0 +1,140 @@
+<div class="dashboard">
+    <aside class="dashboard__menu">
+        <div class="dashboard__menu-brand">
+            <img src="assets/fuse-logo.png" alt="Logo" class="dashboard__menu-brand-logo">
+            <h3 class="dashboard__menu-brand-name">BANK FAKE</h3>
+        </div>
+
+        <nav class="dashboard__menu-nav">
+            <h4 class="dashboard__menu-nav-title">DASHBOARDS</h4>
+            <ul class="dashboard__menu-nav-list">
+                <li class="dashboard__menu-nav-item"
+                    [ngClass]="{'dashboard__menu-nav-item--active': activeMenu === 'project'}">
+                    <a class="dashboard__menu-nav-link" href="#" (click)="setActiveMenu('project')">
+                        <i class="fas fa-layout-text-sidebar-reverse"></i>
+                        Project
+                    </a>
+                </li>
+                <li class="dashboard__menu-nav-item"
+                    [ngClass]="{'dashboard__menu-nav-item--active': activeMenu === 'analytics'}">
+                    <a class="dashboard__menu-nav-link" href="#" (click)="setActiveMenu('analytics')">
+                        <i class="fas fa-chart-line"></i>
+                        Analytics
+                    </a>
+                </li>
+                <li class="dashboard__menu-nav-item"
+                    [ngClass]="{'dashboard__menu-nav-item--active': activeMenu === 'finance'}">
+                    <a class="dashboard__menu-nav-link" href="#" (click)="setActiveMenu('finance')">
+                        <i class="fas fa-wallet"></i>
+                        Finance
+                    </a>
+                </li>
+                <li class="dashboard__menu-nav-item"
+                    [ngClass]="{'dashboard__menu-nav-item--active': activeMenu === 'crypto'}">
+                    <a class="dashboard__menu-nav-link" href="#" (click)="setActiveMenu('crypto')">
+                        <i class="fab fa-bitcoin"></i>
+                        Crypto
+                    </a>
+                </li>
+            </ul>
+            <h4 class="dashboard__menu-nav-title">APPLICATIONS</h4>
+            <ul class="dashboard__menu-nav-list">
+                <li class="dashboard__menu-nav-item">
+                    <a class="dashboard__menu-nav-link" href="#" (click)="setActiveMenu('academy')"
+                        [ngClass]="{'dashboard__menu-nav-item--active': activeMenu === 'academy'}">
+                        <i class="fas fa-graduation-cap"></i>
+                        Academy
+                    </a>
+                </li>
+                <li class="dashboard__menu-nav-item">
+                    <a class="dashboard__menu-nav-link" href="#" (click)="setActiveMenu('chat')"
+                        [ngClass]="{'dashboard__menu-nav-item--active': activeMenu === 'chat'}">
+                        <i class="fas fa-comment"></i>
+                        Chat
+                    </a>
+                </li>
+                <li class="dashboard__menu-nav-item">
+                    <a class="dashboard__menu-nav-link" href="#" (click)="setActiveMenu('contacts')"
+                        [ngClass]="{'dashboard__menu-nav-item--active': activeMenu === 'contacts'}">
+                        <i class="fas fa-user-friends"></i>
+                        Contacts
+                    </a>
+                </li>
+                <li class="dashboard__menu-nav-item">
+                    <a class="dashboard__menu-nav-link dashboard__menu-nav-link--has-submenu" href="#"
+                        (click)="toggleSubmenu('ecommerce')"
+                        [ngClass]="{'dashboard__menu-nav-item--active': activeMenu === 'ecommerce'}">
+                        <i class="fas fa-shopping-cart"></i>
+                        ECommerce
+                        <i class="fas"
+                            [ngClass]="{'fa-chevron-down': ecommereceSubmenuOpen, 'fa-chevron-up': !ecommereceSubmenuOpen}"></i>
+
+                    </a>
+                    <ul class="dashboard__menu-nav-submenu"
+                        [ngClass]="{'dashboard__menu-nav-submenu--open': ecommereceSubmenuOpen}">
+                        <li class="dashboard__menu-nav-submenu-item"
+                            [ngClass]="{'dashboard__menu-nav-item--active': activeMenu === 'inventory'}">
+                            <a class="dashboard__menu-nav-submenu-link" href="#" (click)="setActiveMenu('inventory')">
+                                Inventory
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dashboard__menu-nav-item"
+                    [ngClass]="{'dashboard__menu-nav-item--active': activeMenu === 'file'}">
+                    <a class="dashboard__menu-nav-link" href="#" (click)="setActiveMenu('file')">
+                        <i class="fas fa-file"></i>
+                        File Manager
+                    </a>
+                </li>
+                <li class="dashboard__menu-nav-item">
+                    <a class="dashboard__menu-nav-link dashboard__menu-nav-link--has-submenu" href="#"
+                        (click)="toggleSubmenu('help')"
+                        [ngClass]="{'dashboard__menu-nav-item--active': activeMenu === 'help'}">
+                        <i class="fas fa-question-circle"></i>
+                        Help Center
+                        <i class="fas"
+                            [ngClass]="{'fa-chevron-down': helpSubmenuOpen, 'fa-chevron-up': !helpSubmenuOpen}"></i>
+                    </a>
+                    <ul class="dashboard__menu-nav-submenu"
+                        [ngClass]="{'dashboard__menu-nav-submenu--open': helpSubmenuOpen}">
+                        <li class="dashboard__menu-nav-submenu-item">
+                            <a class="dashboard__menu-nav-submenu-link" href="#">
+                                Contact Support
+                            </a>
+                        </li>
+                        <li class="dashboard__menu-nav-submenu-item">
+                            <a class="dashboard__menu-nav-submenu-link" href="#">
+                                Tutorials
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </nav>
+    </aside>
+    <div class="dashboard__content">
+        <header class="dashboard__header">
+            <div class="dashboard__header-left">
+                <i class="fas fa-list" style="font-size: 30px;"></i>
+                <span class="dashboard__header-title">Welcome back, Brian!</span>
+                <i class="fas fa-bell" style="font-size: 20px;"></i>
+                <span class="dashboard__header-message-counter">You have 2 new messages and 15 new tasks</span>
+
+            </div>
+            <div class="dashboard__header-right">
+                <div class="dashboard__header-right-buttons">
+                    <button class="dashboard__header-right-button">Messages</button>
+                    <button
+                        class="dashboard__header-right-button dashboard__header-right-button--secondary">Settings</button>
+                </div>
+                <div class="dashboard__header-right-actions">
+                    <i class="fas fa-globe"></i>
+                </div>
+            </div>
+        </header>
+        <main class="dashboard__main">
+        </main>
+    </div>
+</div>
