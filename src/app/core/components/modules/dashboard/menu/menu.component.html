@@ -1,0 +1,51 @@
+<div class="mlateral__menu-brand">
+    <img src="/assets/img/logo_b.png" alt="Company Logo" class="mlateral__menu-brand-logo">
+    <h3 class="mlateral__menu-brand-name">BANK FAKE</h3>
+</div>
+
+<nav class="mlateral__menu-nav">
+    <h4 class="mlateral__menu-nav-title">ADMINISTRACIÓN</h4>
+    <small class="mlateral__menu-nav-subtitle">Menú de administración del sistema</small>
+    <ul class="mlateral__menu-nav-list">
+        <li class="mlateral__menu-nav-item" [ngClass]="{'mlateral__menu-nav-item--active': activeMenu === 'usuarios'}">
+            <a class="mlateral__menu-nav-link" routerLink="/usuarios" (click)="setActiveMenu('usuarios')">
+                <i class="fas fa-user-friends"></i>
+                Usuarios
+            </a>
+        </li>
+        <li class="mlateral__menu-nav-item"
+            [ngClass]="{'mlateral__menu-nav-item--active': activeMenu === 'roles'}">
+            <a class="mlateral__menu-nav-link" routerLink="/roles" (click)="setActiveMenu('roles')">
+                <i class="fas fa-chart-line"></i>
+                Roles
+            </a>
+        </li>
+    </ul>
+    <h4 class="mlateral__menu-nav-title">APPLICATIONS</h4>
+    <small class="mlateral__menu-nav-subtitle">Menú bancario</small>
+    <ul class="mlateral__menu-nav-list">
+        <li class="mlateral__menu-nav-item">
+            <a class="mlateral__menu-nav-link" routerLink="/customer" (click)="setActiveMenu('customer')"
+                [ngClass]="{'mlateral__menu-nav-item--active': activeMenu === 'customer'}">
+                <i class="fas fa-graduation-cap"></i>
+                Customer
+            </a>
+        </li>
+        <li class="mlateral__menu-nav-item">
+            <a class="mlateral__menu-nav-link" routerLink="/account" (click)="setActiveMenu('account')"
+                [ngClass]="{'mlateral__menu-nav-item--active': activeMenu === 'account'}">
+                <i class="fas fa-comment"></i>
+                Account
+            </a>
+        </li>
+        <li class="mlateral__menu-nav-item">
+            <a class="mlateral__menu-nav-link" routerLink="/transaction" (click)="setActiveMenu('transaction')"
+                [ngClass]="{'mlateral__menu-nav-item--active': activeMenu === 'transaction'}">
+                <i class="fas fa-user-friends"></i>
+                Transaction
+            </a>
+        </li>
+
+    </ul>
+
+</nav>

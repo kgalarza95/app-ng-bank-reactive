@@ -1,61 +1,87 @@
 <section class="login">
+
     <div class="login__container">
 
         <div class="login__left">
+
             <div class="login__logo">
                 <img src="/assets/img/logo_b.png" alt="Company Logo" class="login__logo-image">
             </div>
             <h2 class="login__title">Sign in</h2>
             <p class="login__text">Don't have an account? <a class="login__link" href="#">Sign up</a></p>
 
-            <form class="login__form" (ngSubmit)="login()">
+            <form class="login__form" [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="login__input-group">
                     <label for="email" class="login__label">Email address*</label>
-                    <input type="email" id="email" name="email" class="login__input" [(ngModel)]="email" required
+                    <input type="email" id="email" class="login__input" formControlName="email" required
                         aria-required="true" placeholder="Enter your email" />
+                    @if(loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+                    <div class="error-validation">
+                        @if(loginForm.get('email')?.errors?.['required']){
+                        <small class="login__error-message">Este campo es obligatorio</small>
+                        }
+                        @if(loginForm.get('email')?.errors?.['email']){
+                        <small class="login__error-message">Este campo debe ser un correo valido</small>
+                        }
+                    </div>
+                    }
                 </div>
 
                 <div class="login__input-group">
                     <label for="password" class="login__label">Password*</label>
                     <div class="login__password-container">
-                        <input [type]="passwordVisible ? 'text' : 'password'" id="password" name="password"
-                            class="login__input login__input--password" [(ngModel)]="password" required
+                        <input [type]="passwordVisible ? 'text' : 'password'" id="password"
+                            class="login__input login__input--password" formControlName="password" required
                             aria-required="true" placeholder="Enter your password" />
                         <button class="login__password-toggle" type="button" (click)="togglePasswordVisibility()">
 
 
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="bi"
-                                [ngClass]="{'bi-eye': !passwordVisible, 'bi-eye-slash': passwordVisible}"
-                                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24"
-                                height="24" stroke-width="2">
-                                <path *ngIf="!passwordVisible" d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                                <path *ngIf="!passwordVisible"
-                                    d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6">
-                                </path>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24"
-                                height="24" stroke-width="2" class="bi"
-                                [ngClass]="{'bi-eye': !passwordVisible, 'bi-eye-slash': passwordVisible}">
-                                <path *ngIf="passwordVisible" d="M10.585 10.587a2 2 0 0 0 2.829 2.828"></path>
-                                <path *ngIf="passwordVisible"
-                                    d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87">
-                                </path>
-                                <path *ngIf="passwordVisible" d="M3 3l18 18"></path>
-                            </svg>
+                            <div class="password-visibility-icon">
+                                @if (!passwordVisible) {
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    class="bi bi-eye" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" width="24" height="24" stroke-width="2">
+                                    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                                    <path
+                                        d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6">
+                                    </path>
+                                </svg>
+                                } @else {
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    class="bi bi-eye-slash" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" width="24" height="24" stroke-width="2">
+                                    <path d="M10.585 10.587a2 2 0 0 0 2.829 2.828"></path>
+                                    <path
+                                        d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87">
+                                    </path>
+                                    <path d="M3 3l18 18"></path>
+                                </svg>
+                                }
+                            </div>
+
                         </button>
                     </div>
+                    @if(loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+                    <div class="error-validation">
+                        @if(loginForm.get('password')?.errors?.['required']){
+                        <small class="login__error-message">Este campo es obligatorio</small>
+                        }
+                    </div>
+                    }
                 </div>
                 <div class="login__options">
                     <div class="login__checkbox-group">
-                        <input type="checkbox" id="rememberMe" [(ngModel)]="rememberMe">
+                        <input type="checkbox" id="rememberMe" formControlName="rememberMe">
                         <label for="rememberMe" class="login__checkbox-label">Remember me</label>
                     </div>
                     <a class="login__forgot-password" href="#">Forgot password?</a>
                 </div>
-                <div *ngIf="error" class="login__error-message" role="alert">
+                @if (error) {
+                <div class="login__error-message" role="alert">
                     {{ error }}
                 </div>
+                }
+
                 <button type="submit" class="login__button">Sign in</button>
             </form>
 

@@ -1,40 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from '../../../services/security/login.service';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from "./navbar/navbar.component";
+import { MenuComponent } from "./menu/menu.component";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, MenuComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
-
+export class DashboardComponent implements OnInit, OnDestroy {
+  menuOpen = true;
+  @ViewChild('menuRef') menuRef!: ElementRef;
 
   constructor(private authService: LoginService, private router: Router) { }
 
-  activeMenu: string | null = 'project';
-  ecommereceSubmenuOpen = false;
-  helpSubmenuOpen = false;
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+    console.log('toggleMenu');
+  }
+  
+  ngOnInit(): void {
 
-  setActiveMenu(menu: string) {
-    this.activeMenu = menu;
-    this.ecommereceSubmenuOpen = false;
-    this.helpSubmenuOpen = false;
+  }
+  ngOnDestroy(): void {
+
   }
 
-  toggleSubmenu(submenu: 'ecommerce' | 'help') {
-    if (submenu === 'ecommerce') {
-      this.ecommereceSubmenuOpen = !this.ecommereceSubmenuOpen;
-      this.helpSubmenuOpen = false;
-    } else if (submenu === 'help') {
-      this.helpSubmenuOpen = !this.helpSubmenuOpen;
-      this.ecommereceSubmenuOpen = false;
-    }
-  }
-  logout() {
-    this.authService.logout()
-    this.router.navigate(['/auth/login'])
-  }
 }
