@@ -20,10 +20,10 @@ export const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    canActivate: [authGuard],
+    //canActivate: [authGuard],
     children: [
       {
-        path: 'usuarios',
+        path: 'users',
         component: UserComponent
       },
       {

@@ -1,32 +1,63 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { OptionItem } from '../../../../model/dto/optionitem';
+import { OpcionItemComponent } from "./opcion-item/opcion-item.component";
+import { MenuItemComponent } from "./menu-item/menu-item.component";
+import { MenuItem } from '../../../../model/dto/menuitem';
 
 @Component({
   selector: 'app-menu',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, OpcionItemComponent, MenuItemComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent {
 
-  activeMenu: string | null = 'project';
-  ecommereceSubmenuOpen = false;
-  helpSubmenuOpen = false;
-
-  setActiveMenu(menu: string) {
-    this.activeMenu = menu;
-    this.ecommereceSubmenuOpen = false;
-    this.helpSubmenuOpen = false;
-  }
-
-  toggleSubmenu(submenu: 'ecommerce' | 'help') {
-    if (submenu === 'ecommerce') {
-      this.ecommereceSubmenuOpen = !this.ecommereceSubmenuOpen;
-      this.helpSubmenuOpen = false;
-    } else if (submenu === 'help') {
-      this.helpSubmenuOpen = !this.helpSubmenuOpen;
-      this.ecommereceSubmenuOpen = false;
+  menuOptions: OptionItem[] = [
+    {
+      routerLink: '/users',
+      iconClass: 'fas fa-users',
+      label: 'Users',
+      activeMenu: 'users'
+    },
+    {
+      routerLink: '/roles',
+      iconClass: 'fas fa-user-tag',
+      label: 'Roles',
+      activeMenu: 'roles'
     }
+  ];
+
+  menuOptions2: OptionItem[] = [
+    {
+      routerLink: '/customer',
+      iconClass: 'fas fa-user-tie',
+      label: 'Customer',
+      activeMenu: 'customer'
+    },
+    {
+      routerLink: '/account',
+      iconClass: 'fas fa-wallet',
+      label: 'Account',
+      activeMenu: 'account'
+    },
+    {
+      routerLink: '/transaction',
+      iconClass: 'fas fa-exchange-alt',
+      label: 'Transaction',
+      activeMenu: 'transaction'
+    }
+  ];
+
+  menuItem1: MenuItem = { subtitle: 'Administración del sistema', title: 'ADMINISTRATION' };
+  menuItem2: MenuItem = { subtitle: 'Menú bancario', title: 'APPLICATIONS' };
+
+  activeMenu: string | null | undefined = 'project';
+
+  setActiveMenu(menu: string | undefined) {
+    console.log('Menu finalote:', menu);
+    this.activeMenu = menu;
   }
+
 }

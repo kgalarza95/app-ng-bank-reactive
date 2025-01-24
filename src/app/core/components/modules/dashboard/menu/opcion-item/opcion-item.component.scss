@@ -1,0 +1,19 @@
+.mlateral {
+    &__menu {
+        &-nav {
+            &-link {
+                display: flex;
+                align-items: center;
+                padding: 0.8rem;
+                text-decoration: none;
+                color: #fff;
+                transition: background-color 0.2s ease;
+
+                i {
+                    margin-right: 0.5rem;
+                }
+
+            }
+        }
+    }
+}

@@ -15,13 +15,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   menuOpen = true;
   @ViewChild('menuRef') menuRef!: ElementRef;
 
-  constructor(private authService: LoginService, private router: Router) { }
+  constructor(private router: Router) { }
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
-    console.log('toggleMenu');
   }
-  
+
   ngOnInit(): void {
 
   }

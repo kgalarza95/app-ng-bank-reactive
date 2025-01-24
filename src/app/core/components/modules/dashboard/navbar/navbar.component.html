@@ -3,7 +3,7 @@
         <button class="navbar__menu-toggle" aria-label="Toggle navigation menu" (click)="onClickToggleMenu()">
             <i class="fas fa-bars"></i>
         </button>
-        <span class="navbar__title">Administración > Usuarios</span>
+        <span class="navbar__title">{{ breadcrumbText }}</span>
     </div>
 
     <div class="navbar__right">
@@ -12,7 +12,8 @@
                 <img src="/assets/img/icon_user.ico" alt="User Profile" class="navbar__user-avatar">
                 <div class="navbar__user-status"></div>
             </div>
-            <app-user-profile-dropdown *ngIf="isDropdownOpen"></app-user-profile-dropdown>
+            @if (isDropdownOpen) { <app-user-profile-dropdown></app-user-profile-dropdown>}
+
         </div>
     </div>
 </nav>

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
 import { UserProfileDropdownComponent } from "./user-profile-dropdown/user-profile-dropdown.component";
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { BreadcrumbService } from '../../../../services/util/breadcrum.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +15,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @Output() toggleMenuOut = new EventEmitter<void>();
   isDropdownOpen = false;
 
+  breadcrumbText: string = 'Dashboard';
+  private breadcrumbSubscription: Subscription | undefined;
+
+  constructor(private breadcrumbService: BreadcrumbService) { }
 
   @HostListener('document:click', ['$event'])
   clickout(event: MouseEvent) {
@@ -27,7 +33,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.breadcrumbSubscription = this.breadcrumbService.breadcrumb$.subscribe(text => {
+      this.breadcrumbText = text;
+    });
+
   }
   ngOnDestroy(): void {
+    if (this.breadcrumbSubscription) {
+      this.breadcrumbSubscription.unsubscribe();
+    }
   }
+
 }

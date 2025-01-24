@@ -1,0 +1,53 @@
+.mlateral {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+
+    &__menu {
+
+        &-nav {
+            display: flex;
+            flex-direction: column;
+            padding-top: 1rem;
+
+            &-title {
+                margin-bottom: 0.5rem;
+                font-size: 0.9rem;
+                color: #818CF8;
+                padding-left: 1.2rem;
+            }
+
+            &-subtitle {
+                margin-bottom: 0.5rem;
+                font-size: 0.7rem;
+                color: #ffffff;
+                padding-left: 1.2rem;
+            }
+
+            &-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            &-item {
+                padding-left: .3rem;
+                margin: 0.2rem 0;
+
+                &--active {
+                    border-radius: 5px;
+                    background-color: #232f44;
+                }
+
+                &:hover {
+                    border-radius: 5px;
+                    background-color: #232f44;
+                }
+            }
+
+
+
+        }
+    }
+
+}

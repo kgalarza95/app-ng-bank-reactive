@@ -28,7 +28,7 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
-      this.authService.login();
+      this.authService.login(this.loginForm.value.email, this.loginForm.value.password);
       this.router.navigate(['/']);
     } else {
       this.error = "El formulario es invalido, verifica los campos";
