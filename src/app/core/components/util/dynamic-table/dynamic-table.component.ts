@@ -6,6 +6,7 @@ interface TableColumn {
   key: string;
   label: string;
   sortable?: boolean;
+  hidden?: boolean;
 }
 
 @Component({

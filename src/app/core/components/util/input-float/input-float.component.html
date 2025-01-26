@@ -1,15 +1,15 @@
 <div class="input-container">
-    <div class="input-group">
-        <span *ngIf="startIcon" class="start-icon">
-            <i [class]="startIcon"></i>
-        </span>
-        <input #inputElement [type]="type" [placeholder]="placeholder" [(ngModel)]="value">
-        <label [class.float]="focused || value">{{label}}</label>
-        <span *ngIf="endIcon" class="end-icon">
-            <i [class]="endIcon"></i>
-        </span>
-    </div>
-    <div class="error" *ngIf="error">{{error}}</div>
+  <div class="input-group">
+    <span *ngIf="startIcon" class="start-icon">
+      <i [class]="startIcon"></i>
+    </span>
+    <input #inputElement [type]="type" [placeholder]="placeholder" [(ngModel)]="value" [disabled]="disabled">
+    <label [class.float]="focused || value">{{label}}</label>
+    <span *ngIf="endIcon" class="end-icon">
+      <i [class]="endIcon"></i>
+    </span>
+  </div>
+  <div class="error" *ngIf="error">{{error}}</div>
 </div>
 
 <!--EJEMPLOS DE USO-->

@@ -23,7 +23,7 @@ export class InputFloatComponent implements ControlValueAccessor, AfterViewInit,
   @Input() startIcon: string = '';
   @Input() endIcon: string = '';
   @Input() error: string = '';
-
+  @Input() disabled: boolean = false;
 
   @ViewChild('inputElement') inputElement!: ElementRef;
 

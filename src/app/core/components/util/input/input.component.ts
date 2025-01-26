@@ -23,7 +23,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit, OnDe
   @Input() startIcon: string = '';
   @Input() endIcon: string = '';
   @Input() error: string = '';
-
+  @Input() disabled: boolean = false;
 
   @ViewChild('inputElement') inputElement!: ElementRef;
 

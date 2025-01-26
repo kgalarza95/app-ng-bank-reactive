@@ -7,10 +7,12 @@ import { Customer } from '../../../../../model/customer';
 import { CustomerDialogService } from '../../../../../services/applications/customer/customer-dialog.service';
 import { Subscription } from 'rxjs';
 import { InputComponent } from '../../../../util/input/input.component';
+import { NotificationComponent } from '../../../../util/notification/notification.component';
+import { NotificationService } from '../../../../util/notification/notification.service';
 
 @Component({
   selector: 'app-dialog-customer',
-  imports: [CommonModule, ButtonComponent, InputFloatComponent, ReactiveFormsModule, InputComponent],
+  imports: [CommonModule, ButtonComponent, InputFloatComponent, ReactiveFormsModule, InputComponent, NotificationComponent],
   templateUrl: './dialog-customer.component.html',
   styleUrl: './dialog-customer.component.scss'
 })
@@ -18,15 +20,16 @@ export class DialogCustomerComponent implements OnInit {
   customerForm: FormGroup;
   customer: Customer | null = null;
   private subscription: Subscription;
-  @Output() closeDialog = new EventEmitter<void>();
 
+  @Output() closeDialog = new EventEmitter<void>();
+  isActive: boolean = false;
 
 
   constructor(private fb: FormBuilder,
-    private customerDialogService: CustomerDialogService
+    private customerDialogService: CustomerDialogService,
+    private notificationService: NotificationService
   ) {
     this.subscription = new Subscription();
-    console.log('llega');
     this.customerForm = this.fb.group({
       identification: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -43,6 +46,10 @@ export class DialogCustomerComponent implements OnInit {
       this.customer = customer;
       this.createForm();
     }));
+
+    this.customerDialogService.isActive$.subscribe((isActive) => {
+      this.isActive = isActive;
+    });
   }
 
   ngOnDestroy() {
@@ -50,10 +57,12 @@ export class DialogCustomerComponent implements OnInit {
   }
 
   onSubmit() {
+    this.showToast('Operación realizada con éxito', 'success');
     if (this.customerForm.valid) {
       console.log(this.customerForm.value);
     } else {
       console.log('Formulario inválido');
+      this.showToast('Revise que el formulario esté completo', 'warning');
     }
   }
 
@@ -72,4 +81,13 @@ export class DialogCustomerComponent implements OnInit {
       birthDate: [this.customer?.birthDate || '', Validators.required]
     });
   }
+
+  showToast(messageToast: string, typeToast?: 'success' | 'error' | 'warning' | 'info') {
+    this.notificationService.show({
+      message: messageToast,
+      type: typeToast,
+      duration: 3000
+    });
+  }
+
 }

@@ -21,7 +21,7 @@ export class SelectComponent {
   selectedLabel: string = '';
 
   ngOnInit() {
-    this.filteredOptions = this.options; // Inicialmente, mostrar todas las opciones
+    this.filteredOptions = this.options; 
     this.updateSelectedLabel();
   }
 
@@ -43,7 +43,7 @@ export class SelectComponent {
   selectOption(option: { value: any, label: string }) {
     this.selectedValue = option.value;
     this.selectedValueChange.emit(this.selectedValue);
-    this.updateSelectedLabel(); // Actualizar al seleccionar
+    this.updateSelectedLabel(); 
     this.isOpen = false;
   }
 

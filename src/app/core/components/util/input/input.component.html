@@ -4,7 +4,7 @@
       <i [class]="startIcon"></i>
     </span>
     <label class="float">{{ label }}</label>
-    <input #inputElement [type]="type" [placeholder]="placeholder" [(ngModel)]="value">
+    <input #inputElement [type]="type" [placeholder]="placeholder" [(ngModel)]="value" [disabled]="disabled">
     <span *ngIf="endIcon" class="end-icon">
       <i [class]="endIcon"></i>
     </span>
