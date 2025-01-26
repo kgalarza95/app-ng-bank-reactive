@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { Customer } from '../../../model/customer';
+import { Account } from '../../../model/account.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerDialogService {
+export class AccountDialogService {
 
-  private customerSource = new BehaviorSubject<Customer | null>(null);
-  customer$ = this.customerSource.asObservable();
+  private acountSource = new BehaviorSubject<Account | null>(null);
+  account$ = this.acountSource.asObservable();
 
   private isActiveSource = new BehaviorSubject<boolean>(false);
   isActive$ = this.isActiveSource.asObservable();
@@ -20,8 +20,8 @@ export class CustomerDialogService {
   refreshTable$ = this.refreshTableSubject.asObservable();
 
 
-  sendCustomer(customer: Customer | null) {
-    this.customerSource.next(customer);
+  sendCustomer(account: Account | null) {
+    this.acountSource.next(account);
   }
 
   sendIsActive(isActive: boolean) {

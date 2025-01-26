@@ -1,0 +1,99 @@
+.transaction-page {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.saldo-panel {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.saldo-panel__header {
+    font-size: 22px;
+    color: #333;
+}
+
+.saldo-panel__amount {
+    font-size: 32px;
+    font-weight: bold;
+    color: #4caf50;
+}
+
+.transaccion-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.transaccion-card {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transaccion-card__header {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.transaccion-card__input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.transaccion-card__cost {
+    font-size: 14px;
+    color: #e57373;
+    margin-bottom: 10px;
+}
+
+.transaccion-card__button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.transaccion-card__button:hover {
+    background-color: #0056b3;
+}
+
+.historial {
+    margin-top: 40px;
+}
+
+.historial__header {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.historial__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.historial__column {
+    padding: 12px;
+    text-align: left;
+    background-color: #f0f0f0;
+}
+
+.historial__cell {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}

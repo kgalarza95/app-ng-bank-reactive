@@ -10,10 +10,11 @@ import { ContainerComponent } from '../../../util/container/container.component'
 import { SelectComponent } from '../../../util/select/select.component';
 import { NotificationService } from '../../../util/notification/notification.service';
 import { NotificationComponent } from '../../../util/notification/notification.component';
+import { ConfirmationDialogComponent } from '../../../util/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-user',
-  imports: [DynamicTableComponent, InputFloatComponent, CommonModule, FormsModule, ButtonComponent, DialogComponent, ContainerComponent, SelectComponent, NotificationComponent],
+  imports: [ConfirmationDialogComponent, DynamicTableComponent, InputFloatComponent, CommonModule, FormsModule, ButtonComponent, DialogComponent, ContainerComponent, SelectComponent, NotificationComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
@@ -166,4 +167,21 @@ export class UserComponent implements OnInit {
     });
   }
 
+
+
+  isDialogOpen = false;
+
+  openDialog() {
+    this.isDialogOpen = true;
+  }
+
+  onConfirmDelete() {
+    console.log('Item deleted');
+    this.isDialogOpen = false;
+  }
+
+  onCancelDelete() {
+    console.log('Delete canceled');
+    this.isDialogOpen = false;
+  }
 }

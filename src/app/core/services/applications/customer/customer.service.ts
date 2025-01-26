@@ -14,7 +14,21 @@ export class CustomerService {
   constructor(private http: HttpClient) { }
 
   createCustomer(customer: Customer): Observable<Customer> {
-    return this.http.post<Customer>(`${environment.apiUrl}${this.apiUri}`, customer);
+    return this.http.post<Customer>(`${environment.apiUrl}${this.apiUri}`, customer).pipe(
+      catchError((error) => {
+        console.error('Error en createCustomer:', error);
+        return throwError(() => error.error || { message: 'Error desconocido', status: error.status });
+      })
+    );
+  }
+
+  updateCustomer(customer: Customer): Observable<Customer> {
+    return this.http.put<Customer>(`${environment.apiUrl}${this.apiUri}`, customer).pipe(
+      catchError((error) => {
+        console.error('Error en updateCustomer:', error);
+        return throwError(() => error.error || { message: 'Error desconocido', status: error.status });
+      })
+    );
   }
 
   getCustomers(): Observable<Customer[]> {
@@ -26,8 +40,8 @@ export class CustomerService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
+      console.error(`${operation} failed: ${error.message}`);
+      return of(result as T); // Devuelve un valor de tipo T en caso de error
     };
   }
 }

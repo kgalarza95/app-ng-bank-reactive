@@ -1,0 +1,98 @@
+.confirmation-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+
+    &__content {
+        position: relative;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        z-index: 2;
+        width: 300px;
+        text-align: center;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    &__title {
+        margin-bottom: 10px;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    &__icon {
+        color: #ffcc00;
+        font-size: 24px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    &__message {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__button {
+        padding: 10px 20px;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+
+
+        &--confirm {
+            background-color: #28a745;
+            color: white;
+
+            &:hover {
+                background-color: darken(#28a745, 10%);
+            }
+        }
+
+        &--cancel {
+            background-color: #d32f2f;
+            color: white;
+
+            &:hover {
+                background-color: darken(#d32f2f, 10%);
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,22 @@
+<div class="confirmation-dialog" *ngIf="isOpen">
+    <div class="confirmation-dialog__overlay" (click)="closeDialog()"></div>
+    <div class="confirmation-dialog__content">
+        <div class="confirmation-dialog__header">
+            <i class="confirmation-dialog__icon fas fa-exclamation-triangle"></i>
+            <h2 class="confirmation-dialog__title">{{ title }}</h2>
+        </div>
+        <div class="confirmation-dialog__message">
+            {{ message }}
+        </div>
+        <div class="confirmation-dialog__actions">
+            <button class="confirmation-dialog__button confirmation-dialog__button--confirm" (click)="onConfirm()"
+                [attr.aria-label]="confirmText">
+                {{ confirmText }}
+            </button>
+            <button class="confirmation-dialog__button confirmation-dialog__button--cancel" (click)="onCancel()"
+                [attr.aria-label]="cancelText">
+                {{ cancelText }}
+            </button>
+        </div>
+    </div>
+</div>

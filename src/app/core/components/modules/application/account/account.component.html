@@ -1,1 +1,14 @@
-<app-container></app-container>
+<app-container>
+    <app-button text="New Account" icon="fas fa-plus" [style]="'solid'" color="primary"
+        (onClick)="onCreate()"></app-button>
+
+    <app-dynamic-table [data]="data" [columns]="columns" (infoEvent)="onInformation($event)"
+        (editEvent)="onEdit($event)" (deleteEvent)="onDelete($event)" [showDeleteButton]="false">
+    </app-dynamic-table>
+
+
+    <app-dialog [visible]="showDialog" title="Account Data Maintenance" (close)="showDialog = false" [width]="'350px'">
+        <app-dialog-account (closeDialog)="showDialog = false" />
+    </app-dialog>
+
+</app-container>

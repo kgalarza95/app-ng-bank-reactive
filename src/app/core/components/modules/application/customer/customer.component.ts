@@ -46,7 +46,13 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadCustomers();
+    this.subscription.add(
+      this.customerDialogService.refreshTable$.subscribe(() => {
+        this.loadCustomers();
+      })
+    );
   }
+
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -78,16 +84,19 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
   onInformation(event: any) {
     this.customerDialogService.sendIsActive(true);
+    this.customerDialogService.sndTypeOperation("I");
     this.abrirDialogo(event);
   }
 
   onCreate() {
     this.customerDialogService.sendIsActive(false);
+    this.customerDialogService.sndTypeOperation("C");
     this.abrirDialogo();
   }
 
   onEdit(event: any) {
     this.customerDialogService.sendIsActive(false);
+    this.customerDialogService.sndTypeOperation("E");
     this.abrirDialogo(event);
   }
 

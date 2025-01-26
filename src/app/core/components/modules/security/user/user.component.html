@@ -55,11 +55,12 @@
         [(ngModel)]="direccion" error="La dirección es obligatoria"></app-input-float>
 
     <!-- <button (click)="openDialog()">Abrir Dialogo</button> -->
-    <p>hola</p>
-    <div>
-        <p>Hola mundo</p>
+    <app-confirmation-dialog [isOpen]="isDialogOpen" [message]="'Are you sure you want to delete this item?'"
+        (confirm)="onConfirmDelete()" (cancel)="onCancelDelete()">
+    </app-confirmation-dialog>
 
-    </div>
+    <button (click)="openDialog()">Delete Item</button>
+
 
 
     <app-notification />

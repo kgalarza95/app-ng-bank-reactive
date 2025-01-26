@@ -1,1 +1,46 @@
-<app-container></app-container>
+<app-container>
+    <p>Hola mundo</p>
+    <div class="transaction-page">
+        <!-- Saldo Global -->
+        <div class="saldo-panel">
+            <h3 class="saldo-panel__header">Saldo disponible</h3>
+            <p class="saldo-panel__amount">{{ saldo  }}</p>
+        </div>
+
+        <!-- Acciones disponibles -->
+        <div class="transaccion-container">
+            <div class="transaccion-card" *ngFor="let action of transactionActions">
+                <h4 class="transaccion-card__header">{{ action.name }}</h4>
+                <input class="transaccion-card__input" type="number" [(ngModel)]="action.amount"
+                    placeholder="Ingrese el monto">
+                <span class="transaccion-card__cost" *ngIf="action.cost > 0">Costo: {{ action.cost | currency }}</span>
+                <button class="transaccion-card__button" (click)="performTransaction(action)">Realizar
+                    Transacción</button>
+            </div>
+        </div>
+
+        <!-- Historial de transacciones -->
+        <div class="historial">
+            <h4 class="historial__header">Historial de Transacciones</h4>
+            <table class="historial__table">
+                <thead>
+                    <tr>
+                        <th class="historial__column">Fecha</th>
+                        <th class="historial__column">Operación</th>
+                        <th class="historial__column">Monto</th>
+                        <th class="historial__column">Costo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transaction of transactions">
+                        <td class="historial__cell">{{ transaction.date | date }}</td>
+                        <td class="historial__cell">{{ transaction.operation }}</td>
+                        <td class="historial__cell">{{ transaction.amount | currency }}</td>
+                        <td class="historial__cell">{{ transaction.cost | currency }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</app-container>

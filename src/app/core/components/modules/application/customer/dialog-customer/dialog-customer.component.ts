@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { InputComponent } from '../../../../util/input/input.component';
 import { NotificationComponent } from '../../../../util/notification/notification.component';
 import { NotificationService } from '../../../../util/notification/notification.service';
+import { CustomerService } from '../../../../../services/applications/customer/customer.service';
 
 @Component({
   selector: 'app-dialog-customer',
@@ -23,11 +24,13 @@ export class DialogCustomerComponent implements OnInit {
 
   @Output() closeDialog = new EventEmitter<void>();
   isActive: boolean = false;
+  TYPE_OPERATION: string | null = null;
 
 
   constructor(private fb: FormBuilder,
     private customerDialogService: CustomerDialogService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private customerService: CustomerService
   ) {
     this.subscription = new Subscription();
     this.customerForm = this.fb.group({
@@ -50,21 +53,62 @@ export class DialogCustomerComponent implements OnInit {
     this.customerDialogService.isActive$.subscribe((isActive) => {
       this.isActive = isActive;
     });
+
+    this.customerDialogService.typeOperation$.subscribe((typeOperation) => {
+      this.TYPE_OPERATION = typeOperation;
+    });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
+
+
   onSubmit() {
-    this.showToast('Operación realizada con éxito', 'success');
     if (this.customerForm.valid) {
-      console.log(this.customerForm.value);
+      const customerData = this.customerForm.value;
+
+      if (this.TYPE_OPERATION === 'E' && this.customer) {
+        const updatedCustomerData = { ...customerData, aggregateId: this.customer.id };
+
+        this.customerService.updateCustomer(updatedCustomerData).subscribe(
+          (updatedCustomer) => {
+            console.log('Cliente actualizado con éxito:', updatedCustomer);
+            this.showToast('Cliente actualizado con éxito', 'success');
+            this.customerDialogService.emitRefreshTable();
+            this.onClose();
+          },
+          (error) => {
+            const errorMessage = error.message || 'Hubo un error al actualizar el cliente';
+            console.log('Error al actualizar el cliente:', error);
+            this.showToast(errorMessage, 'warning');
+          }
+        );
+      } else if (this.TYPE_OPERATION === 'C') {
+        this.customerService.createCustomer(customerData).subscribe(
+          (newCustomer) => {
+            console.log('Cliente creado con éxito:', newCustomer);
+            this.showToast('Cliente creado con éxito', 'success');
+            this.customerDialogService.emitRefreshTable();
+            this.onClose();
+          },
+          (error) => {
+            const errorMessage = error.message || 'Hubo un error al crear el cliente';
+            console.log('Error al crear el cliente:', error);
+            this.showToast(errorMessage, 'warning');
+          }
+        );
+      }
     } else {
       console.log('Formulario inválido');
       this.showToast('Revise que el formulario esté completo', 'warning');
     }
   }
+
+
+
+
 
   onClose() {
     this.closeDialog.emit();
