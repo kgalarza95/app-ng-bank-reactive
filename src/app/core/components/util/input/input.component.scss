@@ -1,0 +1,55 @@
+.input-container {
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease-in-out;
+  
+    &:focus-within {
+      border-color: #1a2337;
+    }
+  
+    input {
+      width: 100%;
+      border: none;
+      outline: none;
+      padding: 10px 0;
+      background-color: transparent;
+      flex: 1;
+    }
+  
+    .start-icon,
+    .end-icon {
+      flex-shrink: 0;
+  
+      i {
+        font-size: 1.2rem;
+        margin: 0 8px;
+        color: #999;
+      }
+    }
+  
+    label {
+      position: absolute;
+      top: -15px; /* Siempre flotando arriba */
+      font-size: 0.8em;
+      color: #555;
+      padding: 0 4px;
+      z-index: 1;
+      left: 8px; /* Ajuste para alinearlo correctamente */
+      background-color: white;
+    }
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+  }
+  

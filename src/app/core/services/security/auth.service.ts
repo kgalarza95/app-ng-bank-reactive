@@ -1,5 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { TokenModel } from '../../model/token.model';
+import { environment } from '../../../environments/environment'
+import { UserModel } from '../../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +14,29 @@ export class AuthService {
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   private userEmailSubject = new BehaviorSubject<string | null>(null);
   userEmail$ = this.userEmailSubject.asObservable();
+  private token: string | null = null;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  login(email: string, password: string) {
-    // Simulación de inicio de sesión exitoso/SOLO DESARROLLO
-    this.isAuthenticatedSubject.next(true);
-    this.userEmailSubject.next(email);
+  login(email: string, password: string): Observable<TokenModel> {
+    const credentials: UserModel = { email, password };
+
+    return this.http.post<TokenModel>(`${environment.apiUrl}/auth/usersadmin/authenticate`, credentials).pipe(
+      tap(response => {
+        this.token = response.token;
+        localStorage.setItem('token', this.token);
+        this.isAuthenticatedSubject.next(true);
+        this.userEmailSubject.next(email);
+      }),
+      catchError(error => {
+        this.logout();
+        return throwError(() => new Error('Error de inicio de sesión'));
+      })
+    );
   }
+
+
+
 
   logout() {
     this.isAuthenticatedSubject.next(false);
@@ -30,5 +49,9 @@ export class AuthService {
 
   getEmail(): string | null {
     return this.userEmailSubject.value;
+  }
+
+  getToken(): string | null {
+    return this.token || localStorage.getItem('token');
   }
 }

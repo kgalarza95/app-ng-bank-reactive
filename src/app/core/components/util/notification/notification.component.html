@@ -1,0 +1,11 @@
+<div *ngIf="currentToast" class="toast" [ngClass]="[
+        'toast--' + (currentToast.type || 'info'), 
+        'toast--visible'
+      ]">
+    <div class="toast__content">
+        {{ currentToast.message }}
+    </div>
+    <button class="toast__close" (click)="close()">
+        ×
+    </button>
+</div>

@@ -1,0 +1,47 @@
+<div class="dynamic-table">
+    <table class="dynamic-table__table">
+        <thead>
+            <tr>
+                <th *ngFor="let column of columns" class="dynamic-table__header"
+                    [class.dynamic-table__header--sortable]="column.sortable"
+                    (click)="column.sortable && sortBy(column.key)">
+                    {{ column.label }}
+                    <span *ngIf="column.sortable && sortColumn === column.key">
+                        {{ sortDirection === 'asc' ? '▲' : '▼' }}
+                    </span>
+                </th>
+                <th class="dynamic-table__header">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of paginatedData" class="dynamic-table__row">
+                <td *ngFor="let column of columns" class="dynamic-table__cell">
+                    {{ item[column.key] }}
+                </td>
+                <td class="dynamic-table__cell dynamic-table__cell--actions">
+                    <button class="info-button" (click)="mostrarInformacion(item)"> <i class="fas fa-info-circle"></i> </button>
+                    <button class="edit-button" (click)="editar(item)" *ngIf="showEditButton"> <i class="fas fa-edit"></i> </button>
+                    <button class="delete-button" (click)="eliminar(item)" *ngIf="showDeleteButton"> <i class="fas fa-trash"></i> </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="dynamic-table__footer">
+        <div class="dynamic-table__pagination">
+            <button class="dynamic-table__page-button" (click)="changePage(currentPage - 1)"
+                [disabled]="currentPage === 1">
+                <i class="fas fa-angle-left"></i>
+            </button>
+
+            <span class="dynamic-table__page-info">
+                Página {{ currentPage }} de {{ totalPages }}
+            </span>
+
+            <button class="dynamic-table__page-button" (click)="changePage(currentPage + 1)"
+                [disabled]="currentPage === totalPages">
+                <i class="fas fa-angle-right"></i>
+            </button>
+        </div>
+    </div>
+</div>

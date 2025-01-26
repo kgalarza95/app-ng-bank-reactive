@@ -1,0 +1,14 @@
+<div class="btn-container">
+    <button [type]="type" [disabled]="disabled" (click)="handleClick()" [ngClass]="[
+        'btn',
+        'btn--' + style,
+        'btn--' + size,
+        'btn--' + color,
+        iconPosition === 'left' ? 'btn--icon-left' : 'btn--icon-right'
+      ]">
+        <span *ngIf="icon" class="btn__icon">
+            <i [class]="icon"></i>
+        </span>
+        <span class="btn__text">{{ text }}</span>
+    </button>
+</div>

@@ -5,11 +5,8 @@
 
 
 <nav class="mlateral__menu-nav">
-    <!-- <app-menu-item [menuOptions]="menuOptions" [menuItem]="menuItem1" (eventGeneral)="setActiveMenu($event)" />
-    <app-menu-item [menuOptions]="menuOptions2" [menuItem]="menuItem2" (eventGeneral)="setActiveMenu($event)" />
- -->
-    <h4 class="mlateral__menu-nav-title">ADMINISTRATION</h4>
-    <small class="mlateral__menu-nav-subtitle">Menú de administración del sistema</small>
+
+    <app-menu-item [menuItem]="menuItem1" />
 
     <ul class="mlateral__menu-nav-list">
         @for (item of menuOptions; track $index) {
@@ -21,9 +18,8 @@
     </ul>
 
 
-
-    <h4 class="mlateral__menu-nav-title">APPLICATIONS</h4>
-    <small class="mlateral__menu-nav-subtitle">Menú bancario</small>
+    <app-menu-item [menuItem]="menuItem2" />
+    
     <ul class="mlateral__menu-nav-list">
         @for (item of menuOptions2; track $index) {
         <li class="mlateral__menu-nav-item"

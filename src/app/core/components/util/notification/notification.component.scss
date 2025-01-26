@@ -1,0 +1,53 @@
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 300px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.toast--visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast--success {
+    background-color: rgba(76, 175, 80, 0.9);
+    color: white;
+}
+
+.toast--error {
+    background-color: rgba(244, 67, 54, 0.9);
+    color: white;
+}
+
+.toast--warning {
+    background-color: rgba(255, 152, 0, 0.9);
+    color: white;
+}
+
+.toast--info {
+    background-color: rgba(33, 150, 243, 0.9);
+    color: white;
+}
+
+.toast__content {
+    margin-right: 15px;
+}
+
+.toast__close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

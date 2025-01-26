@@ -2,58 +2,65 @@
     <div class="user-crud__header">
         <h2 class="user-crud__title">Lista de Áreas</h2>
         <div class="user-crud__actions">
-            <div class="user-crud__search">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Filtrar Tabla">
-            </div>
             <button class="user-crud__add-button">
                 <i class="fas fa-plus"></i> Agregar Nuevo
             </button>
         </div>
     </div>
-    <div class="user-crud__content">
-        <div class="user-crud__table-container">
-            <table class="user-crud__table">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Área</th>
-                        <th>Subárea</th>
-                        <th>Estado</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
 
-        <div class="user-crud__pagination">
-            <div class="user-crud__pagination-options">
-                <label>Items per page: </label>
-                <select>
-                    <option>5</option>
-                    <option>10</option>
-                    <option>20</option>
-                    <option>50</option>
-                </select>
-            </div>
-            <div class="user-crud__pagination-info">
-                <span>0 of 0</span>
-                <div class="user-crud__pagination-buttons">
-                    <button><i class="fas fa-angle-left"></i></button>
-                    <button><i class="fas fa-angle-right"></i></button>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
 </div>
+
+<app-container>
+
+    <app-dynamic-table [data]="data" [columns]="columns">
+    </app-dynamic-table>
+
+    <!-- 1. Uso básico:-->
+    <app-input-float label="Nombre de usuario" [(ngModel)]="username"></app-input-float>
+
+    <!--3. Con tipo de input específico: -->
+    <app-input-float label="Contraseña" type="password" [(ngModel)]="password"></app-input-float>
+    <!--4. Con icono al inicio: -->
+    <app-input-float label="Usuario" startIcon="fas fa-user" [(ngModel)]="usuario"></app-input-float>
+    <!--5. Con icono al final: -->
+    <app-input-float label="Buscar" endIcon="fas fa-search" [(ngModel)]="busqueda"></app-input-float>
+    <!--6. Con icono al inicio y al final: -->
+    <app-input-float label="Fecha" startIcon="fas fa-calendar" endIcon="fas fa-times"
+        [(ngModel)]="fecha"></app-input-float>
+
+    <!-- validador-->
+    <app-input-float label="Teléfono" [(ngModel)]="telefono" (blur)="validarTelefono()"
+        [error]="telefonoError"></app-input-float>
+
+    <app-select [options]="options" placeholder="Selecciona un país" [(selectedValue)]="selectedCountry">
+    </app-select>
+
+    <button (click)="obtenerValor()">Obtener Valor</button>
+
+    <app-button text="Guardar" icon="fas fa-save" [style]="'solid'" color="primary" (onClick)="guardar()"></app-button>
+    <app-button text="Cancelar" [style]="'outlined'" (onClick)="cancelar()"></app-button>
+    <app-button text="Enviar" type="submit" [size]="'large'" [disabled]="true"></app-button>
+
+
+    <app-button text="abrirDialogo" icon="fas fa-save" [style]="'solid'" color="primary"
+        (onClick)="abrirDialogo()"></app-button>
+
+    <app-dialog [visible]="showDialog" title="Título del diálogo" (close)="showDialog = false" [width]="'500px'">
+        <p>Este es el contenido del diálogo. Puedes poner cualquier cosa aquí.</p>
+        <app-button text="Guardar" icon="fas fa-save" [style]="'solid'" color="primary"
+            (onClick)="guardar()"></app-button>
+    </app-dialog>
+
+
+    <!-- <button (click)="openDialog()">Abrir Dialogo</button> -->
+    <p>hola</p>
+    <div>
+        <p>Hola mundo</p>
+      
+    </div>
+
+ 
+    <app-notification />
+
+
+</app-container>

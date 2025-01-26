@@ -1,0 +1,70 @@
+<div class="input-container">
+    <div class="input-group">
+        <span *ngIf="startIcon" class="start-icon">
+            <i [class]="startIcon"></i>
+        </span>
+        <input #inputElement [type]="type" [placeholder]="placeholder" [(ngModel)]="value">
+        <label [class.float]="focused || value">{{label}}</label>
+        <span *ngIf="endIcon" class="end-icon">
+            <i [class]="endIcon"></i>
+        </span>
+    </div>
+    <div class="error" *ngIf="error">{{error}}</div>
+</div>
+
+<!--EJEMPLOS DE USO-->
+
+<!-- 1. Uso básico:
+<app-input-float label="Nombre de usuario" [(ngModel)]="username"></app-input-float>
+
+-->
+<!--. Con placeholder: 
+<app-input-float label="Correo electrónico" placeholder="ejemplo@email.com" [(ngModel)]="email"></app-input-float>
+-->
+<!--3. Con tipo de input específico: 
+<app-input-float label="Contraseña" type="password" [(ngModel)]="password"></app-input-float>
+-->
+<!--4. Con icono al inicio:
+<app-input-float label="Usuario" startIcon="fas fa-user" [(ngModel)]="usuario"></app-input-float>
+ -->
+<!--5. Con icono al final: 
+<app-input-float label="Buscar" endIcon="fas fa-search" [(ngModel)]="busqueda"></app-input-float>-->
+<!--6. Con icono al inicio y al final: 
+<app-input-float label="Fecha" startIcon="fas fa-calendar" endIcon="fas fa-times" [(ngModel)]="fecha"></app-input-float>-->
+
+<!--7. Con mensaje de error: 
+<app-input-float label="Dirección" placeholder="Introduce tu dirección" startIcon="fas fa-map-marker-alt"
+    [(ngModel)]="direccion" error="La dirección es obligatoria"></app-input-float>-->
+<!-- validador
+<app-input-float label="Teléfono" [(ngModel)]="telefono" (blur)="validarTelefono()"
+    [error]="telefonoError"></app-input-float>-->
+<!--8. Combinando todas las opciones: 
+<app-input-float label="Dirección" placeholder="Introduce tu dirección" startIcon="fas fa-map-marker-alt"
+    [(ngModel)]="direccion" error="La dirección es obligatoria">
+</app-input-float>-->
+
+<!--      username: string = '';
+  email: string = '';
+  password: string = '';
+  usuario: string = '';
+  busqueda: string = '';
+  fecha: string = '';
+  direccion: string = '';
+  telefono: string = '';
+
+  // Ejemplo de manejo de error con una propiedad
+  telefonoError: string = '';
+
+  validarTelefono() {
+    if (this.telefono.length !== 10) {
+      this.telefonoError = 'El teléfono debe tener 10 dígitos';
+    } else {
+      this.telefonoError = '';
+    }
+  }
+
+  obtenerValor() {
+    console.log("Valor del input:", this.username);
+    // Puedes hacer lo que quieras con el valor, como enviarlo a un servicio
+  }
+-->

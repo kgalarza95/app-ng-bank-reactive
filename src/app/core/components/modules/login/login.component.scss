@@ -95,7 +95,6 @@
 
     &__input--password {
         padding-right: 3rem;
-        /* Modified to accommodate icon */
     }
 
     &__password-container {
@@ -168,9 +167,10 @@
         border-radius: 25px;
         cursor: pointer;
         transition: background-color 0.2s ease;
+        font-weight: bold;
 
         &:hover {
-            background-color: #4e46e5f4;
+            background-color: #4e46e5de;
         }
     }
 

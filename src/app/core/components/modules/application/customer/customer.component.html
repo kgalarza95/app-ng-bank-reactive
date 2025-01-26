@@ -1,1 +1,17 @@
-<p>customer works!</p>
+<app-container>
+    <app-button text="New Customer" icon="fas fa-plus" [style]="'solid'" color="primary"
+        (onClick)="abrirDialogo()"></app-button>
+
+
+    <app-dynamic-table [data]="data" [columns]="columns" (infoEvent)="onInformation($event)"
+        (editEvent)="onEdit($event)" (deleteEvent)="onDelete($event)">
+    </app-dynamic-table>
+
+   
+
+    <app-dialog [visible]="showDialog" title="Customer Maintenance" (close)="showDialog = false" [width]="'800px'">
+        <app-dialog-customer (closeDialog)="showDialog = false"></app-dialog-customer>
+    </app-dialog>
+
+    
+</app-container>

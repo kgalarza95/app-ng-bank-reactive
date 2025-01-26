@@ -1,0 +1,10 @@
+<div class="dialog-container" [style.width]="config.width || '500px'" [style.height]="config.height || 'auto'">
+    <div class="dialog-header">
+        <button class="dialog-close" (click)="close(false)">×</button>
+    </div>
+    <div class="dialog-content" #dialogContent></div>
+    <div class="dialog-actions">
+        <button (click)="close(false)">Cancelar</button>
+        <button (click)="close(true)">Aceptar</button>
+    </div>
+</div>

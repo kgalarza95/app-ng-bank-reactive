@@ -1,0 +1,19 @@
+<form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+    <app-input-float label="Identificación" formControlName="identification"
+        startIcon="fas fa-id-card"></app-input-float>
+    <app-input-float label="Nombre" formControlName="firstName" startIcon="fas fa-user"></app-input-float>
+    <app-input-float label="Apellido" formControlName="lastName" startIcon="fas fa-user"></app-input-float>
+    <app-input-float label="Correo electrónico" type="email" formControlName="email"
+        startIcon="fas fa-envelope"></app-input-float>
+    <app-input-float label="Teléfono" formControlName="phone" startIcon="fas fa-phone"></app-input-float>
+    <app-input-float label="Dirección" formControlName="address" startIcon="fas fa-map-marker-alt"></app-input-float>
+
+        <app-input label="Fecha de nacimiento" type="date" formControlName="birthDate"
+            startIcon="fas fa-calendar-alt"></app-input>
+
+
+    <div class="button-container">
+        <app-button type="submit" text="Guardar" icon="fas fa-save" [style]="'solid'" color="primary"></app-button>
+        <app-button text="Cancelar" [style]="'outlined'" (onClick)="onClose()"> </app-button>
+    </div>
+</form>

@@ -8,7 +8,7 @@ import { MenuItem } from '../../../../model/dto/menuitem';
 
 @Component({
   selector: 'app-menu',
-  imports: [CommonModule, RouterLink, OpcionItemComponent, MenuItemComponent],
+  imports: [CommonModule, OpcionItemComponent, MenuItemComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })

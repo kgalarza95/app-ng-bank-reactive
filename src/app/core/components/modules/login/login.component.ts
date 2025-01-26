@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LoginService } from '../../../services/security/login.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -28,8 +28,15 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value.email, this.loginForm.value.password);
-      this.router.navigate(['/']);
+      this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+        next: () => {
+          console.log('Inicio de sesión exitoso');
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error('Error de inicio de sesión:', err);
+        }
+      });
     } else {
       this.error = "El formulario es invalido, verifica los campos";
     }

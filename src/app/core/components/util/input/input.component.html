@@ -1,0 +1,13 @@
+<div class="input-container">
+  <div class="input-group">
+    <span *ngIf="startIcon" class="start-icon">
+      <i [class]="startIcon"></i>
+    </span>
+    <label class="float">{{ label }}</label>
+    <input #inputElement [type]="type" [placeholder]="placeholder" [(ngModel)]="value">
+    <span *ngIf="endIcon" class="end-icon">
+      <i [class]="endIcon"></i>
+    </span>
+  </div>
+  <div class="error" *ngIf="error">{{ error }}</div>
+</div>

@@ -1,0 +1,12 @@
+<div class="select">
+    <div class="select__display" (click)="toggleDropdown()" [class.select__display--active]="isOpen">
+        {{ selectedLabel }}
+    </div>
+    <div class="select__options" *ngIf="isOpen">
+        <input type="text" class="select__options__search" [(ngModel)]="filterText" (input)="filterOptions()"
+            placeholder="Buscar...">
+        <div *ngFor="let option of filteredOptions" (click)="selectOption(option)" class="select__options__item">
+            {{ option.label }}
+        </div>
+    </div>
+</div>
