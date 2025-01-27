@@ -5,7 +5,7 @@ import { ButtonComponent } from '../../../util/button/button.component';
 import { DialogComponent } from '../../../util/dialog/dialog.component';
 import { Customer } from '../../../../model/customer';
 import { CustomerDialogService } from '../../../../services/applications/customer/customer-dialog.service';
-import { Subscription } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { CustomerService } from '../../../../services/applications/customer/customer.service';
 import { DialogCustomerComponent } from '../customer/dialog-customer/dialog-customer.component';
 import { Account } from '../../../../model/account.model';
@@ -66,18 +66,22 @@ export class AccountComponent {
   loadCustomers() {
     this.loading = true;
     this.error = null;
-    this.subscription.add(this.accountService.getAccounts().subscribe({
-      next: (dataIn) => {
-        this.data = dataIn;
-      },
-      error: (error) => {
-        this.error = error;
-      },
-      complete: () => {
-        this.loading = false;
-      }
+    this.subscription.add(
+      this.accountService.getAccounts().pipe(
+        tap({
+          next: (dataIn) => {
+            this.data = dataIn;
+          },
+          error: (error) => {
+            this.error = error;
+          },
+          complete: () => {
+            this.loading = false;
+          }
+        })
+      ).subscribe()
+    );
 
-    }));
 
   }
 
@@ -110,6 +114,7 @@ export class AccountComponent {
   }
 
   handlerOnCloseDialog(resp: string) {
+    console.log(resp);
     this.showDialog = false;
     if (resp === "ok") { this.showToast('Operation completed successfully', 'success'); }
   }

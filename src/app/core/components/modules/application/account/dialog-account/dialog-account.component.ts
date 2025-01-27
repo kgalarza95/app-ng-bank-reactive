@@ -3,7 +3,7 @@ import { ButtonComponent } from '../../../../util/button/button.component';
 import { InputFloatComponent } from '../../../../util/input-float/input-float.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { catchError, of, Subscription, tap } from 'rxjs';
 import { InputComponent } from '../../../../util/input/input.component';
 import { NotificationComponent } from '../../../../util/notification/notification.component';
 import { NotificationService } from '../../../../util/notification/notification.service';
@@ -75,7 +75,7 @@ export class DialogAccountComponent {
 
 
   onClose(resp?: string) {
-    this.closeDialog.emit();
+    this.closeDialog.emit(resp);
   }
 
   createForm() {
@@ -113,28 +113,32 @@ export class DialogAccountComponent {
 
     if (this.TYPE_OPERATION === 'E' && this.account) {
       const updatedData = { ...formData, customerId: this.account.customerId };
-      this.accountService.updateAccount(updatedData).subscribe(
-        (updatedCustomer) => {
+      this.accountService.updateAccount(updatedData).pipe(
+        tap(() => {
           this.accountDialogService.emitRefreshTable();
           this.onClose("ok");
-        },
-        (error) => {
+        }),
+        catchError((error) => {
           const errorMessage = error.message || 'There was an error updating the customer';
           this.showToast(errorMessage, 'warning');
-        }
-      );
+          return of(null);
+        })
+      ).subscribe();
+
     } else if (this.TYPE_OPERATION === 'C') {
-      this.accountService.createAccount(formData).subscribe(
-        (newCustomer) => {
+      this.accountService.createAccount(formData).pipe(
+        tap(() => {
           this.accountDialogService.emitRefreshTable();
-          this.onClose();
-        },
-        (error) => {
+          this.onClose("ok");
+        }),
+        catchError((error) => {
           const errorMessage = error.message || 'There was an error creating the customer';
           console.log('Error creating the customer:', error);
           this.showToast(errorMessage, 'warning');
-        }
-      );
+          return of(null); 
+        })
+      ).subscribe();
+
     }
   }
 

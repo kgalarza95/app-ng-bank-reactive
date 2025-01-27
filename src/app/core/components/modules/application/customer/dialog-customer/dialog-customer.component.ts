@@ -110,7 +110,6 @@ export class DialogCustomerComponent implements OnInit {
 
       this.customerService.updateCustomer(updatedCustomerData).subscribe(
         (updatedCustomer) => {
-          console.log('Cliente actualizado con éxito:', updatedCustomer);
           this.showToast('Cliente actualizado con éxito', 'success');
           this.customerDialogService.emitRefreshTable();
           this.onClose();
