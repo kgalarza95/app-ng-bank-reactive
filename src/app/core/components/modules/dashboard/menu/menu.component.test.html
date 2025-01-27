@@ -6,6 +6,18 @@
 
 <nav class="mlateral__menu-nav">
 
+    <app-menu-item [menuItem]="menuItem1" />
+
+    <ul class="mlateral__menu-nav-list">
+        @for (item of menuOptions; track $index) {
+        <li class="mlateral__menu-nav-item"
+            [ngClass]="{'mlateral__menu-nav-item--active': activeMenu === item.activeMenu}">
+            <app-opcion-item [item]="item" (eventActiveMenu)="setActiveMenu($event)" />
+        </li>
+        }
+    </ul>
+
+
     <app-menu-item [menuItem]="menuItem2" />
     
     <ul class="mlateral__menu-nav-list">

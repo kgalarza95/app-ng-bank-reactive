@@ -1,21 +1,21 @@
-<div class="user-profile-dropdown">
+<div class="user-profile-dropdown" role="menu" aria-labelledby="user-profile-dropdown-title">
     <div class="user-profile-dropdown__header">
+        <h2 id="user-profile-dropdown-title" class="visually-hidden">User Profile Menu</h2>
         <span>Signed in as</span>
-        <span class="user-profile-dropdown__email">{{ userEmail }}</span>
+        <span class="user-profile-dropdown__email" aria-live="polite">{{ userEmail }}</span>
     </div>
     <hr>
     <ul class="user-profile-dropdown__list">
-        <li class="user-profile-dropdown__item">
-            <i class="fas fa-user"></i>
+        <li class="user-profile-dropdown__item" role="menuitem" tabindex="0">
+            <i class="fas fa-user" aria-hidden="true"></i>
             <span>Profile</span>
         </li>
-        <li class="user-profile-dropdown__item">
-            <i class="fas fa-cog"></i>
+        <li class="user-profile-dropdown__item" role="menuitem" tabindex="0">
+            <i class="fas fa-cog" aria-hidden="true"></i>
             <span>Settings</span>
         </li>
-
-        <li class="user-profile-dropdown__item" (click)="logout()">
-            <i class="fas fa-sign-out-alt"></i>
+        <li class="user-profile-dropdown__item" role="menuitem" tabindex="0" (click)="logout()">
+            <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
             <span>Sign out</span>
         </li>
     </ul>

@@ -1,12 +1,13 @@
-<div class="dashboard" [class.dashboard--menu-open]="menuOpen">
-    <aside #menuRef class="dashboard__menu">
+<div class="dashboard" [class.dashboard--menu-open]="menuOpen" aria-live="polite">
+    <aside #menuRef class="dashboard__menu" role="navigation" aria-label="Main menu">
         <app-menu></app-menu>
     </aside>
 
     <div class="dashboard__content">
         <header class="dashboard__header">
-            <app-navbar (toggleMenuOut)="toggleMenu()" />
+            <app-navbar (toggleMenuOut)="toggleMenu()" aria-label="Toggle menu"></app-navbar>
         </header>
+
         <main class="dashboard__main">
             <router-outlet></router-outlet>
         </main>

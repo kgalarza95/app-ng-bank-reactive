@@ -24,7 +24,7 @@ export class DialogAccountComponent {
   account: Account | null = null;
   private subscription: Subscription;
 
-  @Output() closeDialog = new EventEmitter<void>();
+  @Output() closeDialog = new EventEmitter<string>();
   isActive: boolean = false;
   TYPE_OPERATION: string | null = null;
 
@@ -68,14 +68,13 @@ export class DialogAccountComponent {
     if (this.accountForm.valid) {
       this.isDialogOpen = true;
     } else {
-      console.log('Formulario inválido');
-      this.showToast('Revise que el formulario esté completo', 'warning');
+      this.showToast('Please ensure the form is complete', 'warning');
     }
   }
 
 
 
-  onClose() {
+  onClose(resp?: string) {
     this.closeDialog.emit();
   }
 
@@ -88,6 +87,18 @@ export class DialogAccountComponent {
 
   }
 
+  getErrorMessage(controlName: string): string {
+    const control = this.accountForm.get(controlName);
+
+    if (control?.touched) {
+      if (control.hasError('required')) {
+        return `${this.getLabel(controlName)} is required.`;
+      }
+    }
+
+    return '';
+  }
+
   showToast(messageToast: string, typeToast?: 'success' | 'error' | 'warning' | 'info') {
     this.notificationService.show({
       message: messageToast,
@@ -96,7 +107,7 @@ export class DialogAccountComponent {
     });
   }
 
-  onConfirmDelete() {
+  onConfirm() {
     this.isDialogOpen = false;
     const formData = this.accountForm.value;
 
@@ -104,34 +115,42 @@ export class DialogAccountComponent {
       const updatedData = { ...formData, customerId: this.account.customerId };
       this.accountService.updateAccount(updatedData).subscribe(
         (updatedCustomer) => {
-          this.showToast('Cliente actualizado con éxito', 'success');
           this.accountDialogService.emitRefreshTable();
-          this.onClose();
+          this.onClose("ok");
         },
         (error) => {
-          const errorMessage = error.message || 'Hubo un error al actualizar el cliente';
+          const errorMessage = error.message || 'There was an error updating the customer';
           this.showToast(errorMessage, 'warning');
         }
       );
     } else if (this.TYPE_OPERATION === 'C') {
       this.accountService.createAccount(formData).subscribe(
         (newCustomer) => {
-          console.log('Cliente creado con éxito:', newCustomer);
-          this.showToast('Cliente creado con éxito', 'success');
           this.accountDialogService.emitRefreshTable();
           this.onClose();
         },
         (error) => {
-          const errorMessage = error.message || 'Hubo un error al crear el cliente';
-          console.log('Error al crear el cliente:', error);
+          const errorMessage = error.message || 'There was an error creating the customer';
+          console.log('Error creating the customer:', error);
           this.showToast(errorMessage, 'warning');
         }
       );
     }
   }
 
-  onCancelDelete() {
+  onCancel() {
     this.isDialogOpen = false;
     this.onClose();
+  }
+
+
+
+  getLabel(controlName: string): string {
+    const labels: { [key: string]: string } = {
+      name: 'Account Name',
+      accountNum: 'Account Number',
+      balance: 'Balance'
+    };
+    return labels[controlName] || 'Field';
   }
 }

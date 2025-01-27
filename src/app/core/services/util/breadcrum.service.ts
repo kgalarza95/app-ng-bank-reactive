@@ -19,7 +19,7 @@ export class BreadcrumbService {
   }
 
   updateBreadcrumb(url: string) {
-    let breadcrumbText = 'Dashboard';
+    let breadcrumbText = 'Banking System';
 
     if (url.includes('/users')) {
       breadcrumbText = 'Administration > Users';

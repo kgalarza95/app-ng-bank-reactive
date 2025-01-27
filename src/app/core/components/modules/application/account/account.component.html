@@ -8,7 +8,9 @@
 
 
     <app-dialog [visible]="showDialog" title="Account Data Maintenance" (close)="showDialog = false" [width]="'350px'">
-        <app-dialog-account (closeDialog)="showDialog = false" />
+        <app-dialog-account (closeDialog)="handlerOnCloseDialog($event)" />
     </app-dialog>
 
 </app-container>
+
+<app-notification />

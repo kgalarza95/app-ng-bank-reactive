@@ -10,16 +10,18 @@ import { Account } from '../../../../model/account.model';
 import { TransactionService } from '../../../../services/applications/transaction/transaction.service';
 import { TransactionResponse } from '../../../../model/transaction-resp.model';
 import { TransactionRequest } from '../../../../model/transaction-req.model';
-import { delay, Observable, of } from 'rxjs';
+import { delay, Observable, of, switchMap, tap } from 'rxjs';
 import { NotificationComponent } from '../../../util/notification/notification.component';
 import { NotificationService } from '../../../util/notification/notification.service';
 import { ConfirmationDialogComponent } from '../../../util/confirmation-dialog/confirmation-dialog.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-transaction',
   imports: [ContainerComponent, CommonModule, FormsModule, SelectComponent, ButtonComponent, DynamicTableComponent, NotificationComponent, ConfirmationDialogComponent],
   templateUrl: './transaction.component.html',
-  styleUrl: './transaction.component.scss'
+  styleUrl: './transaction.component.scss',
+  providers: [DatePipe]
 })
 export class TransactionComponent implements OnInit {
 
@@ -94,14 +96,20 @@ export class TransactionComponent implements OnInit {
     );
   }
 
-  private getTransactions(accountId?: string): void {
+
+  getTransactions(accountId?: string): void {
     this.transactionService.getTransactions(accountId).subscribe(
       (dataRep) => {
-        this.data = dataRep;
+        const datePipe = new DatePipe('en-US');
+        this.data = dataRep.map(transaction => {
+          return {
+            ...transaction,
+            formattedDate: datePipe.transform(transaction.date, 'yyyy-MM-dd')
+          };
+        });
       },
       (error) => {
         this.showToast('Error retrieving transactions', 'error');
-
       }
     );
   }
@@ -112,7 +120,6 @@ export class TransactionComponent implements OnInit {
     const action = this.transactionSelected;
     const accountId = this.idAccountSelected;
 
-    console.log(action.transactionKey);
     const totalAmount = action.amount + action.cost;
     if (['W', 'P', 'O'].includes(action.transactionKey) && this.saldo < totalAmount) {
       this.showToast('Insufficient balance to complete the transaction', 'warning');
@@ -135,8 +142,7 @@ export class TransactionComponent implements OnInit {
 
     this.transactionService.makeTransaction(action.transactionKey, transactionRequest).subscribe({
       next: (response) => {
-        console.log('Transaction successful:', response);
-
+        this.showToast('Transaction ok.', 'success');
         this.getAccountDetails(accountId);
         this.getTransactions(accountId);
 
@@ -147,10 +153,11 @@ export class TransactionComponent implements OnInit {
         });
       },
       error: (error) => {
-        console.error('Transaction failed:', error);
         this.showToast('Transaction failed. Please try again later.', 'error');
       }
     });
+
+
   }
 
   onCancel() {

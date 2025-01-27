@@ -10,10 +10,11 @@ import { InputComponent } from '../../../../util/input/input.component';
 import { NotificationComponent } from '../../../../util/notification/notification.component';
 import { NotificationService } from '../../../../util/notification/notification.service';
 import { CustomerService } from '../../../../../services/applications/customer/customer.service';
+import { ConfirmationDialogComponent } from '../../../../util/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-dialog-customer',
-  imports: [CommonModule, ButtonComponent, InputFloatComponent, ReactiveFormsModule, InputComponent, NotificationComponent],
+  imports: [ConfirmationDialogComponent, CommonModule, ButtonComponent, InputFloatComponent, ReactiveFormsModule, InputComponent, NotificationComponent],
   templateUrl: './dialog-customer.component.html',
   styleUrl: './dialog-customer.component.scss'
 })
@@ -26,6 +27,7 @@ export class DialogCustomerComponent implements OnInit {
   isActive: boolean = false;
   TYPE_OPERATION: string | null = null;
 
+  isDialogOpen = false;
 
   constructor(private fb: FormBuilder,
     private customerDialogService: CustomerDialogService,
@@ -67,47 +69,12 @@ export class DialogCustomerComponent implements OnInit {
 
   onSubmit() {
     if (this.customerForm.valid) {
-      const customerData = this.customerForm.value;
-
-      if (this.TYPE_OPERATION === 'E' && this.customer) {
-        const updatedCustomerData = { ...customerData, aggregateId: this.customer.id };
-
-        this.customerService.updateCustomer(updatedCustomerData).subscribe(
-          (updatedCustomer) => {
-            console.log('Cliente actualizado con éxito:', updatedCustomer);
-            this.showToast('Cliente actualizado con éxito', 'success');
-            this.customerDialogService.emitRefreshTable();
-            this.onClose();
-          },
-          (error) => {
-            const errorMessage = error.message || 'Hubo un error al actualizar el cliente';
-            console.log('Error al actualizar el cliente:', error);
-            this.showToast(errorMessage, 'warning');
-          }
-        );
-      } else if (this.TYPE_OPERATION === 'C') {
-        this.customerService.createCustomer(customerData).subscribe(
-          (newCustomer) => {
-            console.log('Cliente creado con éxito:', newCustomer);
-            this.showToast('Cliente creado con éxito', 'success');
-            this.customerDialogService.emitRefreshTable();
-            this.onClose();
-          },
-          (error) => {
-            const errorMessage = error.message || 'Hubo un error al crear el cliente';
-            console.log('Error al crear el cliente:', error);
-            this.showToast(errorMessage, 'warning');
-          }
-        );
-      }
+      this.isDialogOpen = true;
     } else {
       console.log('Formulario inválido');
       this.showToast('Revise que el formulario esté completo', 'warning');
     }
   }
-
-
-
 
 
   onClose() {
@@ -132,6 +99,48 @@ export class DialogCustomerComponent implements OnInit {
       type: typeToast,
       duration: 3000
     });
+  }
+
+  onConfirm() {
+    this.isDialogOpen = false;
+    const customerData = this.customerForm.value;
+
+    if (this.TYPE_OPERATION === 'E' && this.customer) {
+      const updatedCustomerData = { ...customerData, aggregateId: this.customer.id };
+
+      this.customerService.updateCustomer(updatedCustomerData).subscribe(
+        (updatedCustomer) => {
+          console.log('Cliente actualizado con éxito:', updatedCustomer);
+          this.showToast('Cliente actualizado con éxito', 'success');
+          this.customerDialogService.emitRefreshTable();
+          this.onClose();
+        },
+        (error) => {
+          const errorMessage = error.message || 'Hubo un error al actualizar el cliente';
+          console.log('Error al actualizar el cliente:', error);
+          this.showToast(errorMessage, 'warning');
+        }
+      );
+    } else if (this.TYPE_OPERATION === 'C') {
+      this.customerService.createCustomer(customerData).subscribe(
+        (newCustomer) => {
+          console.log('Cliente creado con éxito:', newCustomer);
+          this.showToast('Cliente creado con éxito', 'success');
+          this.customerDialogService.emitRefreshTable();
+          this.onClose();
+        },
+        (error) => {
+          const errorMessage = error.message || 'Hubo un error al crear el cliente';
+          console.log('Error al crear el cliente:', error);
+          this.showToast(errorMessage, 'warning');
+        }
+      );
+    }
+  }
+
+  onCancel() {
+    this.isDialogOpen = false;
+    this.onClose();
   }
 
 }

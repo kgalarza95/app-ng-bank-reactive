@@ -12,10 +12,12 @@ import { Account } from '../../../../model/account.model';
 import { AccountDialogService } from '../../../../services/applications/account/account-dialog.service';
 import { AccountService } from '../../../../services/applications/account/account.service';
 import { DialogAccountComponent } from './dialog-account/dialog-account.component';
+import { NotificationComponent } from '../../../util/notification/notification.component';
+import { NotificationService } from '../../../util/notification/notification.service';
 
 @Component({
   selector: 'app-account',
-  imports: [ContainerComponent, DynamicTableComponent, ButtonComponent, DialogComponent, DialogCustomerComponent, DialogAccountComponent],
+  imports: [ContainerComponent, DynamicTableComponent, ButtonComponent, DialogComponent, DialogCustomerComponent, DialogAccountComponent, NotificationComponent],
   templateUrl: './account.component.html',
   styleUrl: './account.component.scss'
 })
@@ -24,7 +26,7 @@ export class AccountComponent {
   dataSelected: Account = {};
 
   columns = [
-    { key: 'customerId', label: 'Customer ID', sortable: true, hidden: false },
+    { key: 'customerId', label: 'Customer ID', sortable: true, hidden: true },
     { key: 'name', label: 'Account Name', sortable: true, hidden: false },
     { key: 'accountNum', label: 'Account Number', sortable: true, hidden: false },
     { key: 'balance', label: 'Balance', sortable: true, hidden: false },
@@ -43,7 +45,8 @@ export class AccountComponent {
   showDialog = false;
 
   constructor(private accountDialogService: AccountDialogService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit(): void {
@@ -104,5 +107,18 @@ export class AccountComponent {
 
   onDelete(event: any) {
     console.table(event);
+  }
+
+  handlerOnCloseDialog(resp: string) {
+    this.showDialog = false;
+    if (resp === "ok") { this.showToast('Operation completed successfully', 'success'); }
+  }
+
+  showToast(messageToast: string, typeToast?: 'success' | 'error' | 'warning' | 'info') {
+    this.notificationService.show({
+      message: messageToast,
+      type: typeToast,
+      duration: 3000
+    });
   }
 }

@@ -30,17 +30,18 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
         next: () => {
-          console.log('Inicio de sesión exitoso');
           this.router.navigate(['/']);
         },
         error: (err) => {
-          console.error('Error de inicio de sesión:', err);
+          this.error = "Invalid credentials, please check your email and password";
         }
       });
     } else {
-      this.error = "El formulario es invalido, verifica los campos";
+      this.error = "The form is invalid, please check the fields";
     }
   }
+
+
 
   togglePasswordVisibility() {
     this.passwordVisible = !this.passwordVisible;

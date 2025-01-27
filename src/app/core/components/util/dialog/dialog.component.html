@@ -1,12 +1,12 @@
-<div *ngIf="visible" class="dialog-overlay" (click)="onClickOutside($event)">
-    <div class="dialog-content" [style.width]="width">
-        <div class="close-btn-container"><button *ngIf="closeable" (click)="handleClose()" class="dialog__close-button"
-                aria-label="Close">×</button></div>
-
-        <h2 class="dialog-title">{{ title }}</h2>
-        <div class="dialog-body">
-            <ng-content></ng-content>
+<div *ngIf="visible" class="dialog dialog--overlay" (click)="onClickOutside($event)">
+    <div class="dialog__content" [style.width]="width">
+        <div class="dialog__close-btn-container">
+            <button *ngIf="closeable" (click)="handleClose()" class="dialog__close-button" aria-label="Close">×</button>
         </div>
 
+        <h2 class="dialog__title">{{ title }}</h2>
+        <div class="dialog__body">
+            <ng-content></ng-content>
+        </div>
     </div>
 </div>

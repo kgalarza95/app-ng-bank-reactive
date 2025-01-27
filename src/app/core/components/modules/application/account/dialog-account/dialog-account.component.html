@@ -1,26 +1,30 @@
 <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
 
-    <app-input-float label="Account Name" formControlName="name" startIcon="fas fa-user" [disabled]="isActive">
+    <app-input-float label="Account Name" formControlName="name" startIcon="fas fa-user" [disabled]="isActive"
+        [error]="getErrorMessage('name')">
     </app-input-float>
 
     <app-input-float label="Account Number" formControlName="accountNum" startIcon="fas fa-hashtag"
-        [disabled]="isActive">
+        [disabled]="isActive" [error]="getErrorMessage('accountNum')">
     </app-input-float>
 
     <app-input-float label="Balance" formControlName="balance" startIcon="fas fa-dollar-sign" type="number"
-        [disabled]="isActive">
+        [disabled]="isActive" [error]="getErrorMessage('balance')">
     </app-input-float>
 
     <div class="button-container">
-        <app-button type="submit" text="Save" icon="fas fa-save" [style]="'solid'" color="primary" [disabled]="isActive">
+        <app-button type="submit" text="Save" icon="fas fa-save" [style]="'solid'" color="primary"
+            [disabled]="isActive">
         </app-button>
         <app-button text="Cancel" [style]="'outlined'" (onClick)="onClose()">
         </app-button>
     </div>
 </form>
 
+
+
 <app-notification />
 
 <app-confirmation-dialog [isOpen]="isDialogOpen" [message]="'Are you sure you want to continue?'"
-    (confirm)="onConfirmDelete()" (cancel)="onCancelDelete()">
+    (confirm)="onConfirm()" (cancel)="onCancel()">
 </app-confirmation-dialog>

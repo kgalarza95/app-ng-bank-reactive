@@ -19,7 +19,8 @@
                     {{ item[column.key] }}
                 </td>
                 <td class="dynamic-table__cell dynamic-table__cell--actions">
-                    <button class="info-button" (click)="mostrarInformacion(item)" *ngIf="showInfButton"> <i class="fas fa-info-circle"></i>
+                    <button class="info-button" (click)="mostrarInformacion(item)" *ngIf="showInfButton"> <i
+                            class="fas fa-info-circle"></i>
                     </button>
                     <button class="edit-button" (click)="editar(item)" *ngIf="showEditButton"> <i
                             class="fas fa-edit"></i> </button>
@@ -38,7 +39,7 @@
             </button>
 
             <span class="dynamic-table__page-info">
-                Página {{ currentPage }} de {{ totalPages }}
+                Page {{ currentPage }} of {{ totalPages }}
             </span>
 
             <button class="dynamic-table__page-button" (click)="changePage(currentPage + 1)"

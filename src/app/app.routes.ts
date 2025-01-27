@@ -8,19 +8,11 @@ import { AccountComponent } from './core/components/modules/application/account/
 import { TransactionComponent } from './core/components/modules/application/transaction/transaction.component';
 import { authGuard } from './core/admin-routes/auth.guard';
 
-/* export const routes: Routes = [
-    {
-        path: 'systembank',
-        loadChildren: () => import('./core/admin-routes/admin.routes').then((adminRoutes) => adminRoutes.routes),
-    },
-    { path: '', redirectTo: '/systembank', pathMatch: 'full' },
-]; */
-
 export const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    //canActivate: [authGuard],
+    canActivate: [authGuard],
     children: [
       {
         path: 'users',
@@ -49,45 +41,7 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    //canActivate: [adminGuard],
     data: { isLogged: true },
-    /* children: [
-        {
-            path: '',
-            component: LoginComponent,
-            data: { isCurrent: true }
-        }
-    ] */
   },
 
 ];
-
-
-/* 
-const routes: Routes = [
-    {
-        path: 'jacobo',
-        loadChildren: () => import('./core/admin-routes/admin.routes').then((adminRoutes) => adminRoutes.routes)
-    }
-
-    /*  {
-         path: '',
-         redirectTo: '/auth/login',
-         pathMatch: 'full'
-     }, 
-      {
-         path: 'auth',
-         loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
-     },
-     {
-         path: 'main',
-         loadChildren: () => import('./main/main.module').then(m => m.MainModule),
-         canActivate: [AuthGuardService]
-     }, 
-       {
-          path: '**',
-          redirectTo: '/auth/login',
-          pathMatch: 'full'
-      }, 
-];
- */

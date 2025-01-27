@@ -18,15 +18,7 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    //canActivate: [adminGuard],
     data: { isLogged: true },
-    /* children: [
-        {
-            path: '',
-            component: LoginComponent,
-            data: { isCurrent: true }
-        }
-    ] */
   },
 
 ];

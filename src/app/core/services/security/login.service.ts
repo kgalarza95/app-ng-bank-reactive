@@ -11,7 +11,6 @@ export class LoginService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    // Simulación de llamada a un API
     if (username === 'admin' && password === 'admin') {
       this.tokenService.setToken('my-fake-token');
       return of(true)

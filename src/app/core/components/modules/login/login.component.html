@@ -8,7 +8,9 @@
                 <img src="/assets/img/logo_b.png" alt="Company Logo" class="login__logo-image">
             </div>
             <h2 class="login__title">Sign in</h2>
-            <p class="login__text">Don't have an account? <a class="login__link" href="#">Sign up</a></p>
+            <p class="login__text">Don't have an account? <a class="login__link" href="#">Request access from the
+                    administrator</a></p>
+
 
             <form class="login__form" [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="login__input-group">
@@ -18,10 +20,10 @@
                     @if(loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
                     <div class="error-validation">
                         @if(loginForm.get('email')?.errors?.['required']){
-                        <small class="login__error-message">Este campo es obligatorio</small>
+                        <small class="login__error-message">This field is required</small>
                         }
                         @if(loginForm.get('email')?.errors?.['email']){
-                        <small class="login__error-message">Este campo debe ser un correo valido</small>
+                        <small class="login__error-message">This field must be a valid email</small>
                         }
                     </div>
                     }
@@ -64,7 +66,7 @@
                     @if(loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
                     <div class="error-validation">
                         @if(loginForm.get('password')?.errors?.['required']){
-                        <small class="login__error-message">Este campo es obligatorio</small>
+                        <small class="login__error-message">This field is required</small>
                         }
                     </div>
                     }

@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../../util/button/button.component';
 import { DialogComponent } from '../../../util/dialog/dialog.component';
-import { DialogService } from '../../../util/dialog-container/dialog.service';
 import { ContainerComponent } from '../../../util/container/container.component';
 import { SelectComponent } from '../../../util/select/select.component';
 import { NotificationService } from '../../../util/notification/notification.service';
@@ -58,7 +57,7 @@ export class UserComponent implements OnInit {
     { nombre: 'Constanza', email: 'constanza@example.com' },
     { nombre: 'Santiago', email: 'santiago@example.com' },
   ];
-  constructor(private dialogService: DialogService,
+  constructor(
     private viewContainerRef: ViewContainerRef,
     private toastService: NotificationService) { }
 

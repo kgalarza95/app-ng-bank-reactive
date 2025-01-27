@@ -41,7 +41,7 @@ export class CustomerService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
-      return of(result as T); // Devuelve un valor de tipo T en caso de error
+      return of(result as T); 
     };
   }
 }
