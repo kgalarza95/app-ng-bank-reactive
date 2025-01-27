@@ -102,17 +102,14 @@ export class DialogAccountComponent {
 
     if (this.TYPE_OPERATION === 'E' && this.account) {
       const updatedData = { ...formData, customerId: this.account.customerId };
-      console.log(updatedData);
       this.accountService.updateAccount(updatedData).subscribe(
         (updatedCustomer) => {
-          console.log('Cliente actualizado con éxito:', updatedCustomer);
           this.showToast('Cliente actualizado con éxito', 'success');
           this.accountDialogService.emitRefreshTable();
           this.onClose();
         },
         (error) => {
           const errorMessage = error.message || 'Hubo un error al actualizar el cliente';
-          console.log('Error al actualizar el cliente:', error);
           this.showToast(errorMessage, 'warning');
         }
       );

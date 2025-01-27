@@ -20,6 +20,7 @@ export class DynamicTableComponent implements OnInit, OnChanges {
   @Input() data: any[] = [];
   @Input() showEditButton: boolean = true;
   @Input() showDeleteButton: boolean = true;
+  @Input() showInfButton: boolean = true;
   @Output() infoEvent = new EventEmitter<any>();
   @Output() editEvent = new EventEmitter<any>();
   @Output() deleteEvent = new EventEmitter<any>();

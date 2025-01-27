@@ -50,13 +50,12 @@ export class MenuComponent {
     }
   ];
 
-  menuItem1: MenuItem = { subtitle: 'Administración del sistema', title: 'ADMINISTRATION' };
-  menuItem2: MenuItem = { subtitle: 'Menú bancario', title: 'APPLICATIONS' };
+  menuItem1: MenuItem = { subtitle: 'System Administration', title: 'ADMINISTRATION' };
+  menuItem2: MenuItem = { subtitle: 'Banking Menu', title: 'APPLICATIONS' };
 
   activeMenu: string | null | undefined = 'project';
 
   setActiveMenu(menu: string | undefined) {
-    console.log('Menu finalote:', menu);
     this.activeMenu = menu;
   }
 

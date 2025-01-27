@@ -38,6 +38,11 @@ export class AccountService {
     );
   }
 
+  getAccountById(customerId?: string): Observable<Account> {
+    const payload = { customerId };
+    return this.http.post<Account>(`${environment.apiUrl}${this.apiUri}/number`, payload);
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
